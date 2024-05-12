@@ -1,24 +1,51 @@
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 
-function MainNav() {
 
-    return(
-    <ul>
-      <li>
-        <NavLink to="/home">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/about">About</NavLink>
-      </li>
-      <li>
-        <NavLink to="/contact">Contact</NavLink>
-      </li>
-      <li>
-        <NavLink to="/posts">Posts</NavLink>
-      </li>
-    </ul>
-    )
-  }
+const HeaderContainer = styled.header`
+  background-color: #F0E68C; /* Gold */
+  padding: 10px;
+`;
 
-  export default MainNav;
+const Nav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Logo = styled.div`
+  color: #4B0082; /* Indigo */
+  font-size: 24px;
+`;
+
+const Menu = styled.ul`
+  display: flex;
+  list-style: none;
+`;
+
+const MenuItem = styled.li`
+  margin-left: 20px;
+`;
+
+;
+
+const MainNav = () => {
+  return (
+    <HeaderContainer>
+      <Nav>
+        <Logo>My Logo</Logo>
+        <Menu>
+          <MenuItem><NavLink to="/home">Home</NavLink></MenuItem>
+          <MenuItem><NavLink to="/about">About</NavLink></MenuItem>
+          <MenuItem><NavLink to="/services">Services</NavLink></MenuItem>
+          <MenuItem><NavLink to="/contact">Contact</NavLink></MenuItem>
+        </Menu>
+      </Nav>
+    </HeaderContainer>
+  );
+}
+
+export default MainNav;
+

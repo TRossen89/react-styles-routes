@@ -37,19 +37,12 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
-    border: solid black;
-
-    font-size: 5vw;
-
 }
 
 
 body{
     font-family: 'PT Sans', 'Times New Roman'
 }
-
-${StyledNavLink}
-
 `;
 
 export default GlobalStyles;
