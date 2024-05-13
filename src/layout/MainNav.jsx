@@ -3,11 +3,30 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 
-
 const HeaderContainer = styled.header`
-  background-color: #F0E68C; /* Gold */
+  background-color: var(--turqois5); /* Gold */
   padding: 10px;
 `;
+
+const StyledNavLink = styled(NavLink)`
+
+/* Remove bottom line */
+text-decoration: none;
+
+/* Define normal state styles */
+color: var(--gold1); /* Normal color */
+
+/* Define hover state styles */
+&:hover {
+  color: var(--gray1); /* Hover color */
+}
+
+/* Define active state styles */
+&.active {
+  color: var(gray3); /* Active color */
+}
+`;
+
 
 const Nav = styled.nav`
   display: flex;
@@ -16,7 +35,7 @@ const Nav = styled.nav`
 `;
 
 const Logo = styled.div`
-  color: #4B0082; /* Indigo */
+  color: var(--gold1); 
   font-size: 24px;
 `;
 
@@ -27,9 +46,13 @@ const Menu = styled.ul`
 
 const MenuItem = styled.li`
   margin-left: 20px;
+  color: var(--gold1);
 `;
 
-;
+const Login = styled.div`
+  
+  color: var(--gold1);
+  `;
 
 const MainNav = () => {
   return (
@@ -37,11 +60,13 @@ const MainNav = () => {
       <Nav>
         <Logo>My Logo</Logo>
         <Menu>
-          <MenuItem><NavLink to="/home">Home</NavLink></MenuItem>
-          <MenuItem><NavLink to="/about">About</NavLink></MenuItem>
-          <MenuItem><NavLink to="/services">Services</NavLink></MenuItem>
-          <MenuItem><NavLink to="/contact">Contact</NavLink></MenuItem>
+          <MenuItem><StyledNavLink to="/home">Home</StyledNavLink></MenuItem>
+          <MenuItem><StyledNavLink to="/about">About</StyledNavLink></MenuItem>
+          <MenuItem><StyledNavLink to="/services">Services</StyledNavLink></MenuItem>
+          <MenuItem><StyledNavLink to="/contact">Contact</StyledNavLink></MenuItem>
+          <MenuItem><StyledNavLink to="/login">Login</StyledNavLink></MenuItem>
         </Menu>
+          
       </Nav>
     </HeaderContainer>
   );
