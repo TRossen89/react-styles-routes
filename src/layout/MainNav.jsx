@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 
 
 const HeaderContainer = styled.header`
@@ -49,12 +49,28 @@ const MenuItem = styled.li`
   color: var(--gold1);
 `;
 
+const LogoutButton = styled.button`
+
+  background_color: var(--turqois5)
+  color: var(--gold1);
+`;
+
 const Login = styled.div`
   
   color: var(--gold1);
   `;
 
 const MainNav = ({isLoggedIn, setIsLoggedIn}) => {
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+
+    setIsLoggedIn(false);
+    navigate("home");
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    
+  }
 
 
   return (
@@ -64,11 +80,11 @@ const MainNav = ({isLoggedIn, setIsLoggedIn}) => {
         <Menu>
           <MenuItem><StyledNavLink to="/home">Home</StyledNavLink></MenuItem>
           <MenuItem><StyledNavLink to="/about">About</StyledNavLink></MenuItem>
-          
+
           {isLoggedIn ? (<MenuItem><StyledNavLink to="/entities">Entities</StyledNavLink></MenuItem>):(<></>)}
           
           <MenuItem><StyledNavLink to="/contact">Contact</StyledNavLink></MenuItem>
-          <MenuItem><StyledNavLink to="/login">Login</StyledNavLink></MenuItem>
+          {isLoggedIn ? (<MenuItem><LogoutButton type="button" onClick={handleLogout}>Logout</LogoutButton></MenuItem>) : (<MenuItem><StyledNavLink to="/login">Login</StyledNavLink></MenuItem>)}
         </Menu>
           
       </Nav>
