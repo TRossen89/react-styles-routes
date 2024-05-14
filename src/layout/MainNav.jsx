@@ -4,7 +4,7 @@ import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 
 
 const HeaderContainer = styled.header`
-  background-color: var(--turqois5); /* Gold */
+  background-color: var(--turqois5);
   padding: 10px;
 `;
 
