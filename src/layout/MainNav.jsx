@@ -14,16 +14,16 @@ const StyledNavLink = styled(NavLink)`
 text-decoration: none;
 
 /* Define normal state styles */
-color: var(--gold1); /* Normal color */
+color: var(--gold1); 
 
 /* Define hover state styles */
 &:hover {
-  color: var(--gray1); /* Hover color */
+  color: var(--gray2); /* Hover color */
 }
 
 /* Define active state styles */
 &.active {
-  color: var(gray3); /* Active color */
+  color: var(--gray1); /* Active color */
 }
 `;
 
@@ -54,7 +54,9 @@ const Login = styled.div`
   color: var(--gold1);
   `;
 
-const MainNav = () => {
+const MainNav = ({isLoggedIn, setIsLoggedIn}) => {
+
+
   return (
     <HeaderContainer>
       <Nav>
@@ -62,7 +64,9 @@ const MainNav = () => {
         <Menu>
           <MenuItem><StyledNavLink to="/home">Home</StyledNavLink></MenuItem>
           <MenuItem><StyledNavLink to="/about">About</StyledNavLink></MenuItem>
-          <MenuItem><StyledNavLink to="/entities">Entities</StyledNavLink></MenuItem>
+          
+          {isLoggedIn ? (<MenuItem><StyledNavLink to="/entities">Entities</StyledNavLink></MenuItem>):(<></>)}
+          
           <MenuItem><StyledNavLink to="/contact">Contact</StyledNavLink></MenuItem>
           <MenuItem><StyledNavLink to="/login">Login</StyledNavLink></MenuItem>
         </Menu>

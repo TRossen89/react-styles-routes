@@ -20,9 +20,6 @@ import AppLayout from "./layout/AppLayout";
 import Login from "./page/Login";
 import { BASE_URL_DEV, BASE_URL_PROD } from "./utils/globalVariables";
 
-const Test = styled.p`
-  background-color: var(--turqois1);
-`;
 
 function Posts() {
   return (
@@ -39,17 +36,22 @@ function Post() {
 }
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+
   return (
     <BrowserRouter>
 
       <Routes>
-        <Route element={<AppLayout />}>
+        <Route element={<AppLayout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}>
 
           <Route index element={<Navigate to="home" />} />
           <Route path="home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
 
           <Route path="posts" element={<Posts />}>
             <Route index element={<h1>New Posts</h1>} />

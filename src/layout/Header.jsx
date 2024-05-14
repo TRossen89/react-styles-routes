@@ -1,9 +1,9 @@
 import MainNav from "./MainNav";
 
-function Header() {
+function Header({isLoggedIn, setIsLoggedIn}) {
     return (
       <>
-        <MainNav />
+        <MainNav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       </>
     );
   }
