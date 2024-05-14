@@ -11,7 +11,7 @@ const getAllEntities = async () => {
 
 const login = async (username, password) => {
   try {
-    const result = await fetch(`${BASE_URL_DEV}auth/login`, {
+    const result = await fetch(`${BASE_URL_PROD}auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
