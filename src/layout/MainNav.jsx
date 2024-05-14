@@ -62,7 +62,7 @@ const MainNav = () => {
         <Menu>
           <MenuItem><StyledNavLink to="/home">Home</StyledNavLink></MenuItem>
           <MenuItem><StyledNavLink to="/about">About</StyledNavLink></MenuItem>
-          <MenuItem><StyledNavLink to="/services">Services</StyledNavLink></MenuItem>
+          <MenuItem><StyledNavLink to="/entities">Entities</StyledNavLink></MenuItem>
           <MenuItem><StyledNavLink to="/contact">Contact</StyledNavLink></MenuItem>
           <MenuItem><StyledNavLink to="/login">Login</StyledNavLink></MenuItem>
         </Menu>
