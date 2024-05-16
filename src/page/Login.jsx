@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { login } from "../services/apiFacade";
+import { login } from "../services/apiFacade.js";
+import { getUserWithRolesFromToken } from "../services/getUserInfoFromToken.js";
 
 const LoginPage = styled.div`
   display: flex;
@@ -44,16 +45,32 @@ const LoginButton = styled.button`
   margin-top: 2vw;
 `;
 
-function Login({ setIsLoggedIn }) {
+function Login({ setIsLoggedIn, setLoggedInUser }) {
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
+
     event.preventDefault();
 
-    login(username, password);
+    try {
+    
+      const token = await login(username, password);
 
-    setIsLoggedIn(true);
+      if (token) {
+        const userDetails = getUserWithRolesFromToken(token);
+        setIsLoggedIn(true);
+        setLoggedInUser(userDetails);
+        console.log('Login successful:', userDetails);
+
+      } else {
+        console.log("Login failed. Check credentials");
+      }
+    } catch (err) {
+      console.log("Some error happened. The error: " + err);
+    }
+    
   };
 
   return (

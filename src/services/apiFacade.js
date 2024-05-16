@@ -3,15 +3,14 @@ import { BASE_URL_DEV, BASE_URL_PROD } from "../utils/globalVariables.js";
 
 
 const getAllEntities = async () => {
-
     
 }
 
 
-
 const login = async (username, password) => {
+  
   try {
-    const result = await fetch(`${BASE_URL_PROD}auth/login`, {
+    const result = await fetch(`${BASE_URL_DEV}auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,6 +26,8 @@ const login = async (username, password) => {
     if (data.token) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.userName);
+    
+      return data.token;
     }
 
   } catch (e) {

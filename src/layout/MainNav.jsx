@@ -60,15 +60,21 @@ const Login = styled.div`
   color: var(--gold1);
   `;
 
-const MainNav = ({isLoggedIn, setIsLoggedIn}) => {
+const MainNav = ({isLoggedIn, setIsLoggedIn, loggedInUser, setLoggedInUser}) => {
 
   const navigate = useNavigate();
+
+  console.log("test");
+  
+
+  
   const handleLogout = () => {
 
     setIsLoggedIn(false);
     navigate("home");
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    setLoggedInUser({"email": "", "name": "", "roles": ["user"]});
     
   }
 
@@ -83,7 +89,8 @@ const MainNav = ({isLoggedIn, setIsLoggedIn}) => {
 
           {isLoggedIn ? (<MenuItem><StyledNavLink to="/entities">Entities</StyledNavLink></MenuItem>):(<></>)}
           
-          <MenuItem><StyledNavLink to="/contact">Contact</StyledNavLink></MenuItem>
+          {loggedInUser.roles.includes('admin') ? (<MenuItem><StyledNavLink to="/settings">Settings</StyledNavLink></MenuItem>):(<></>)}
+        
           {isLoggedIn ? (<MenuItem><LogoutButton type="button" onClick={handleLogout}>Logout</LogoutButton></MenuItem>) : (<MenuItem><StyledNavLink to="/login">Login</StyledNavLink></MenuItem>)}
         </Menu>
           

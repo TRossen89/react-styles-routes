@@ -13,7 +13,7 @@ import {
 import styled from "styled-components";
 import About from "./page/About";
 
-import Contact from "./page/Contact";
+import Settings from "./page/Settings";
 import PageNotFound from "./page/PageNotFound";
 import Home from "./page/Home";
 import AppLayout from "./layout/AppLayout";
@@ -38,6 +38,7 @@ function Post() {
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState({"email": "", "name":"", "roles": ["user"]});
 
 
 
@@ -45,13 +46,13 @@ function App() {
     <BrowserRouter>
 
       <Routes>
-        <Route element={<AppLayout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}>
+        <Route element={<AppLayout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />}>
 
           <Route index element={<Navigate to="home" />} />
           <Route path="home" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />} />
 
           <Route path="posts" element={<Posts />}>
             <Route index element={<h1>New Posts</h1>} />
