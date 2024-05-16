@@ -1,28 +1,59 @@
 import { useReducer } from "react";
 import { BASE_URL_DEV, BASE_URL_PROD } from "../utils/globalVariables.js";
 
-const getAllEntities = async () => {
-  try {
-    const result = await fetch(`${BASE_URL_DEV}/entityOne`);
+function createEntity(data) {
+  // Initiate the fetch request
 
-    if (!result.ok) {
-      throw new Error("Fect didn't work");
-      console.log("fetch dign't work");
-    }
+  const token = localStorage.getItem("token");
 
-    const data = await result.json();
-    return data;
+  return fetch(`${BASE_URL_DEV}/entityOne`, {
+    method: "POST", // HTTP method to create an entity
+    headers: {
+      "Content-Type": "application/json", // Sending JSON data
+      Authorization: `Bearer ${token}`, // Authorization header with token
+    },
+    body: JSON.stringify(data), // Convert the data object to a JSON string
+  })
+    .then((response) => {
+      // First then() handles the response object
+      if (!response.ok) {
+        // If the response is not ok, throw an error
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      // Return the parsed JSON from the response
+      return response.json(); // response.json() returns a promise
+    })
+    .then((result) => {
+      // Second then() handles the parsed JSON data
+      return result; // Return the result to the caller
+    })
+    .catch((error) => {
+      // catch() handles any errors in the promise chain
+      console.error("Error creating entity:", error); // Log any errors to the console
+      throw error; // Re-throw the error so it can be handled by the caller
+    });
+}
 
-  } catch (err) {
+function getAllEntities() {
 
-    if (err.status) {
-      err.fullError.then((e) => console.log(e.detail));
-
-    } else {
-      console.log("Network error");
-    }
-  }
-};
+  return fetch(`${BASE_URL_DEV}/entityOne`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Fetch didn't work");
+      }
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      if (err.status) {
+        err.fullError.then((e) => console.log(e.detail));
+      } else {
+        console.log("Network error");
+      }
+    });
+}
 
 const login = async (username, password) => {
   try {
@@ -51,5 +82,6 @@ const login = async (username, password) => {
 };
 
 export { login };
-export {getAllEntities};
+export { getAllEntities };
+export { createEntity };
 //login("tobias@email.dk", "1234");

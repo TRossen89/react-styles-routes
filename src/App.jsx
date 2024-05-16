@@ -52,8 +52,8 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/entities" element={<Entities isLoggedIn={isLoggedIn} />} />
-          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />} />
+          <Route path="/entities" element={<Entities isLoggedIn={isLoggedIn} loggedInUser={loggedInUser} />} />
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setLoggedInUser={setLoggedInUser} />} />
 
           <Route path="posts" element={<Posts />}>
             <Route index element={<h1>New Posts</h1>} />

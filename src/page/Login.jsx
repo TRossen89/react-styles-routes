@@ -49,6 +49,7 @@ function Login({ setIsLoggedIn, setLoggedInUser }) {
   
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
