@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../services/apiFacade.js";
 import { getUserWithRolesFromToken } from "../services/getUserInfoFromToken.js";
 
@@ -49,6 +49,7 @@ function Login({ setIsLoggedIn, setLoggedInUser }) {
   
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
 
@@ -63,6 +64,7 @@ function Login({ setIsLoggedIn, setLoggedInUser }) {
         setIsLoggedIn(true);
         setLoggedInUser(userDetails);
         console.log('Login successful:', userDetails);
+        navigate('/home');
 
       } else {
         console.log("Login failed. Check credentials");

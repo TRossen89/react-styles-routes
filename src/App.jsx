@@ -12,7 +12,7 @@ import {
 
 import styled from "styled-components";
 import About from "./page/About";
-
+import Entities from "./page/Entities";
 import Settings from "./page/Settings";
 import PageNotFound from "./page/PageNotFound";
 import Home from "./page/Home";
@@ -52,6 +52,7 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/entities" element={<Entities isLoggedIn={isLoggedIn} />} />
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />} />
 
           <Route path="posts" element={<Posts />}>
