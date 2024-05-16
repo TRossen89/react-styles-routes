@@ -1,11 +1,12 @@
 import React from "react";
-import { getAllEntities } from "../services/apiFacade";
 import { useState, useEffect } from "react";
 import EntitiesForm from "./EntitiesForm";
 import EntitiesList from "./EntitiesList";
-import { createEntity } from "../services/apiFacade";
-
-
+import {
+  createEntity,
+  deleteEntity,
+  getAllEntities,
+} from "../services/apiFacade";
 
 const blankEntity = {
   id: "",
@@ -14,16 +15,12 @@ const blankEntity = {
 };
 
 export default function Entities({ isLoggedIn, loggedInUser }) {
-
   const [entities, setEntities] = useState([]);
   const [entityToEdit, setEntityToEdit] = useState({ ...blankEntity });
 
   function editEntity(entity) {
     setEntityToEdit(entity);
   }
-
-
-
 
   function addEntity(entity) {
     try {
@@ -36,16 +33,16 @@ export default function Entities({ isLoggedIn, loggedInUser }) {
 
         delete entityCreatedParsed.dtoTWOSet;
 
-        setEntities((previousEntities) => [...previousEntities, entityCreatedParsed]);
+        setEntities((previousEntities) => [
+          ...previousEntities,
+          entityCreatedParsed,
+        ]);
       });
     } catch (error) {
       // Handle any errors that occur during the fetch or result handling
       console.error("Error:", error);
     }
   }
-
-
-  
 
   function updateEntity(entity) {
     /*
@@ -65,24 +62,26 @@ export default function Entities({ isLoggedIn, loggedInUser }) {
   }
 
   function deleteById(id) {
-    /*fetchData(`${APIURL}/${id}`, ()=>{}, 'DELETE');
-  
-      setEntities([...entities.filter(p => p.id != id)]);
-      */
+    deleteEntity(id)
+      .then(() => {
+        setEntities([...entities.filter((p) => p.id != id)]);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the fetch or result handling
+        console.error("Error:", error);
+      });
   }
 
   async function getEntities() {
     try {
       const allEntities = getAllEntities();
 
-      allEntities.then((parsed)=>{
+      allEntities.then((parsed) => {
         const allEntitiesCreatedParsed = parsed;
         console.log(allEntitiesCreatedParsed);
 
-      setEntities(allEntitiesCreatedParsed);
-
-      })
-      
+        setEntities(allEntitiesCreatedParsed);
+      });
     } catch (err) {
       console.log(
         "Some error happened getting all entities. The error: " + err

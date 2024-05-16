@@ -1,10 +1,51 @@
 import { useReducer } from "react";
 import { BASE_URL_DEV, BASE_URL_PROD } from "../utils/globalVariables.js";
 
+
+
+
+
+function deleteEntity(id) {
+  // Initiate the fetch request
+
+  const token = localStorage.getItem("token");
+
+
+  return fetch(`${BASE_URL_DEV}/entityOne/${id}`, {
+    method: "DELETE", // HTTP method to create an entity
+    headers: {
+    
+      Authorization: `Bearer ${token}`, // Authorization header with token
+    }
+  })
+    .then((response) => {
+      // First then() handles the response object
+      if (!response.ok) {
+        // If the response is not ok, throw an error
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      // Return the parsed JSON from the response
+      return response.json(); // response.json() returns a promise
+    })
+    .then((result) => {
+      // Second then() handles the parsed JSON data
+      console.log(result); // Return the result to the caller
+    })
+    .catch((error) => {
+      // catch() handles any errors in the promise chain
+      console.error("Error creating entity:", error); // Log any errors to the console
+      throw error; // Re-throw the error so it can be handled by the caller
+    });
+}
+
+
+
+
 function createEntity(data) {
   // Initiate the fetch request
 
   const token = localStorage.getItem("token");
+
 
   return fetch(`${BASE_URL_DEV}/entityOne`, {
     method: "POST", // HTTP method to create an entity
@@ -84,4 +125,5 @@ const login = async (username, password) => {
 export { login };
 export { getAllEntities };
 export { createEntity };
+export { deleteEntity };
 //login("tobias@email.dk", "1234");
