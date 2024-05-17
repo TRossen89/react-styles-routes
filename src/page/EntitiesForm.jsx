@@ -17,7 +17,7 @@ const EntitiesForm = ({ addOrUpdateEntity, blankEntity, entityToEdit }) => {
     console.log({...entity});
 
     addOrUpdateEntity({ ...entity });
-    setEntity(blankEntity)
+    //setEntity(blankEntity)
   }
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import {
   createEntity,
   deleteEntity,
   getAllEntities,
+  updateEntity
 } from "../services/apiFacade";
 
 const blankEntity = {
@@ -18,9 +19,12 @@ export default function Entities({ isLoggedIn, loggedInUser }) {
   const [entities, setEntities] = useState([]);
   const [entityToEdit, setEntityToEdit] = useState({ ...blankEntity });
 
+  
   function editEntity(entity) {
     setEntityToEdit(entity);
   }
+
+
 
   function addEntity(entity) {
     try {
@@ -44,16 +48,35 @@ export default function Entities({ isLoggedIn, loggedInUser }) {
     }
   }
 
-  function updateEntity(entity) {
-    /*
+  function updateEntityFrontend(entity) {
+
+    const entityWithdtoTWOSet = {"id": entity.id, "templateField1": entity.templateField1, "templateField2": entity.templateField2, "dtoTWOSet": []};
+
+    try {
+      const entityUpdated = updateEntity(entityWithdtoTWOSet, entityWithdtoTWOSet.id);
+
+      entityUpdated.then((parsed) => {
+        
+        const entityUpdatedParsed = parsed;
+
+        console.log("Entity updated with fetch: " + entityUpdatedParsed);
+
+        delete entityUpdatedParsed.dtoTWOSet;
+
+        setEntities(entities.map((p) => p.id === entityUpdatedParsed.id ? {...entityUpdatedParsed} : p))
+
       
-      fetchData(`${APIURL}/${entity.id}`, (entityCreated) => setEntities(entities.map((p) => p.id === entityCreated.id ? {...entityCreated} : p)), 'PUT', entity);
-       */
+      });
+    } catch (error) {
+      // Handle any errors that occur during the fetch or result handling
+      console.error("Error:", error);
+    }
+
   }
 
   function addOrUpdateEntity(entity) {
     if (entity.id != "") {
-      //updateEntity(entity);
+      updateEntityFrontend(entity);
     } else {
       delete entity.id;
 
