@@ -135,6 +135,7 @@ function updateEntity(data, id) {
 
 
 const login = async (username, password) => {
+  
   try {
     const result = await fetch(`${BASE_URL_PROD}/auth/login`, {
       method: "POST",
