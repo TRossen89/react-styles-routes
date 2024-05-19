@@ -12,7 +12,7 @@ function deleteEntity(id) {
   const token = localStorage.getItem("token");
 
 
-  return fetch(`${URL}${id}`, {
+  return fetch(`${URL}/entityOne/${id}`, {
     method: "DELETE", // HTTP method to create an entity
     headers: {
     
