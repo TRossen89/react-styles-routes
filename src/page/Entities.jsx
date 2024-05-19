@@ -9,13 +9,19 @@ import {
   updateEntity
 } from "../services/apiFacade";
 
+
+
+
 const blankEntity = {
   id: "",
   templateField1: "",
   templateField2: "",
 };
 
+
+
 export default function Entities({ isLoggedIn, loggedInUser }) {
+  
   const [entities, setEntities] = useState([]);
   const [entityToEdit, setEntityToEdit] = useState({ ...blankEntity });
 

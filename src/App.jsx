@@ -18,7 +18,7 @@ import PageNotFound from "./page/PageNotFound";
 import Home from "./page/Home";
 import AppLayout from "./layout/AppLayout";
 import Login from "./page/Login";
-import { BASE_URL_DEV, BASE_URL_PROD } from "./utils/globalVariables";
+
 
 
 function Posts() {

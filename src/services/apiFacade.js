@@ -2,7 +2,8 @@ import { useReducer } from "react";
 import { BASE_URL_DEV, BASE_URL_PROD } from "../utils/globalVariables.js";
 
 
-
+const URL = BASE_URL_PROD;
+//const URL = BASE_URL_DEV;
 
 
 function deleteEntity(id) {
@@ -11,7 +12,7 @@ function deleteEntity(id) {
   const token = localStorage.getItem("token");
 
 
-  return fetch(`${BASE_URL_DEV}/entityOne/${id}`, {
+  return fetch(`${URL}${id}`, {
     method: "DELETE", // HTTP method to create an entity
     headers: {
     
@@ -47,7 +48,7 @@ function createEntity(data) {
   const token = localStorage.getItem("token");
 
 
-  return fetch(`${BASE_URL_DEV}/entityOne`, {
+  return fetch(`${URL}/entityOne`, {
     method: "POST", // HTTP method to create an entity
     headers: {
       "Content-Type": "application/json", // Sending JSON data
@@ -77,7 +78,7 @@ function createEntity(data) {
 
 function getAllEntities() {
 
-  return fetch(`${BASE_URL_DEV}/entityOne`)
+  return fetch(`${URL}/entityOne`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Fetch didn't work");
@@ -102,7 +103,7 @@ function updateEntity(data, id) {
   const token = localStorage.getItem("token");
 
 
-  return fetch(`${BASE_URL_DEV}/entityOne/${id}`, {
+  return fetch(`${URL}/entityOne/${id}`, {
     method: "PUT", // HTTP method to create an entity
     headers: {
       "Content-Type": "application/json", // Sending JSON data
@@ -136,7 +137,7 @@ function updateEntity(data, id) {
 
 const login = async (username, password) => {
   try {
-    const result = await fetch(`${BASE_URL_DEV}/auth/login`, {
+    const result = await fetch(`${URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

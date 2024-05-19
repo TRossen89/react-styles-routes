@@ -66,7 +66,6 @@ const MainNav = ({isLoggedIn, setIsLoggedIn, loggedInUser, setLoggedInUser}) => 
 
   console.log("test");
   
-
   
   const handleLogout = () => {
 
